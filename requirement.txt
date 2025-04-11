@@ -1,0 +1,11 @@
+pillow
+lxml==4.9.1
+requests-html==0.10.0
+SpeechRecognition
+pyttsx3
+requests
+psutil
+pyautogui
+PyAudio==0.2.11
+transformers
+torch
