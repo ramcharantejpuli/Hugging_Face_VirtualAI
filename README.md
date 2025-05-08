@@ -1,21 +1,21 @@
 # Bittu - Your Intelligent Voice Assistant 🎙️
 
 ## Overview
-Bittu is a sophisticated voice assistant that combines the power of HuggingFace's AI models with system automation to create a seamless voice-controlled computing experience. Using natural language, you can control your computer, get information, and have intelligent conversations.
+Bittu is a sophisticated voice assistant that combines the power of Groq's AI models with system automation to create a seamless voice-controlled computing experience. Using natural language, you can control your computer, get information, and have intelligent conversations.
 
 ## 🌟 Key Features
 
 ### 🗣️ Voice Control
 - Wake word detection: "Hey Bittu" or "OK Bittu"
-- Natural language understanding using HuggingFace AI
+- Natural language understanding using Groq AI
 - Dynamic circle animation for visual feedback
 - Automatic timeout after 7 seconds of silence
 
 ### 🤖 AI Integration
-- HuggingFace's language models for intelligent responses
+- Groq's Llama 3 70B language model for intelligent responses
+- Ultra-fast inference for quick response times
 - Context-aware conversations
 - Natural and informative replies
-- Free API with 25,000 requests per month
 
 ### ⚡ System Commands
 - **Media Control**
@@ -35,22 +35,22 @@ Bittu is a sophisticated voice assistant that combines the power of HuggingFace'
   - "Check weather"
   - "Latest news"
 
-### 🕒 Time & Information
+### Time & Information
 - Time-based greetings (morning/afternoon/evening)
 - Current time and date
 - Weather updates
 - Random jokes
 
-## 🛠️ Technical Stack
+## Technical Stack
 - **Python 3.10.11** - Core programming
 - **SpeechRecognition** - Voice input processing
 - **pyttsx3** - Text-to-speech conversion
-- **HuggingFace API** - AI language model
+- **Groq API** - AI language model (Llama 3 70B)
 - **PyAudio** - Audio processing
 - **pyautogui** - System control
 - **psutil** - System monitoring
 
-## 📦 Installation
+## Installation
 
 1. Clone the repository
 2. Create virtual environment:
@@ -64,9 +64,9 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-4. Configure HuggingFace API:
-- Get API key from [HuggingFace](https://huggingface.co/)
-- Add key to `config.py`
+4. Configure Groq API:
+- Get API key from [Groq](https://console.groq.com/)
+- Add key to `action.py` (API key variable is defined at the top of the file)
 
 ## 🚀 Usage
 
@@ -110,17 +110,16 @@ Web:
 - Adjust wake word sensitivity in `gui.py`
 - Customize AI responses in `action.py`
 - Modify system commands in `action.py`
-- Configure API settings in `config.py`
+- Configure Groq API key in `action.py`
 
 ## 📂 Project Structure
 ```
 Virtual Assistant/
 ├── gui.py           # Main interface & wake word
-├── action.py        # Command processing & AI
+├── action.py        # Command processing & AI with Groq API key
 ├── speak.py         # Text-to-speech engine
 ├── spech_to_text.py # Voice recognition
 ├── weather.py       # Weather service
-├── config.py        # API configuration
 └── requirements.txt # Dependencies
 ```
 
