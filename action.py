@@ -10,7 +10,9 @@ import subprocess
 import psutil
 import platform
 import pyautogui
-from config import HUGGINGFACE_API_KEY, HF_MODEL_NAME
+# API key for Groq
+GROQ_API_KEY = "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"
+GROQ_MODEL = "llama3-70b-8192"  # Using Llama 3 model
 
 def get_news():
     try:
@@ -79,29 +81,38 @@ def get_greeting():
     else:
         return "Good night"
 
-def chat_with_hf(prompt):
+def chat_with_groq(prompt):
     try:
-        API_URL = f"https://api-inference.huggingface.co/models/{HF_MODEL_NAME}"
-        headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
+        API_URL = "https://api.groq.com/openai/v1/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {GROQ_API_KEY}",
+            "Content-Type": "application/json"
+        }
         
         # Format the prompt for better responses
-        formatted_prompt = f"Assistant: I am Bittu, a helpful AI assistant. Please help with: {prompt}\nResponse:"
+        data = {
+            "model": GROQ_MODEL,
+            "messages": [
+                {"role": "system", "content": "You are Bittu, a helpful AI assistant. Provide medium-length, concise answers that are exact and to the point. For technical questions, be accurate and precise."}, 
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.7,
+            "max_tokens": 500
+        }
         
         # Make API call
-        response = requests.post(API_URL, headers=headers, json={"inputs": formatted_prompt})
+        response = requests.post(API_URL, headers=headers, json=data)
         
         if response.status_code == 200:
             # Extract the response text
-            result = response.json()[0]['generated_text']
-            # Clean up the response if needed
-            result = result.replace('Assistant:', '').replace('Response:', '').strip()
+            result = response.json()["choices"][0]["message"]["content"]
             return result if result else "I'm not sure how to help with that."
         else:
-            print(f"HuggingFace API Error: {response.status_code}")
+            print(f"Groq API Error: {response.status_code}")
             return "I'm having trouble connecting to my brain right now."
             
     except Exception as e:
-        print(f"HuggingFace Error: {str(e)}")
+        print(f"Groq Error: {str(e)}")
         return "I'm having trouble connecting to my brain right now."
 
 def Action(data_btn):
@@ -142,8 +153,8 @@ def Action(data_btn):
         return "My name is Bittu, your AI Assistant!"
         
     elif "what's my name" in data_btn or "do you know me" in data_btn:
-        speak.speak("Your name is Lavanya, and it's a pleasure to assist you!")
-        return "Your name is Lavanya!"
+        speak.speak("Your name is Puli Ram Charan Tej, and it's a pleasure to assist you!")
+        return "Your name is Puli Ram Charan Tej!"
         
     # Time and Date
     elif "time now" in data_btn or "what's the time" in data_btn or "time" in data_btn:
@@ -356,8 +367,8 @@ def Action(data_btn):
         speak.speak("Goodbye! Have a great day!")
         return "ok sir"
         
-    # Use HuggingFace for all other queries
+    # Use Groq for all other queries
     else:
-        response = chat_with_hf(data_btn)
+        response = chat_with_groq(data_btn)
         speak.speak(response)
         return response
