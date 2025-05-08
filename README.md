@@ -132,7 +132,7 @@ Virtual Assistant/
 
 ## 👨‍💻 Author
 **Puli Ram Charan Tej ❤️**
-CSM355CA1 - AI and ML Project
+CSM355 - AI and ML Project
 
 ## 📄 License
 This project is for educational purposes. Created as part of CSM355 coursework.
